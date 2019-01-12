@@ -36,7 +36,7 @@ func main() {
 		buffer.Reset()
 		data, err := ioutil.ReadFile(rfilename)
 		if err != nil {
-			fmt.Println("File reading error:\n", err)
+			fmt.Println("File reading error:\n\t", err, "\n\nMake sure you're in the correct folder and that you spelled everything correctly.")
 			return
 		}
 		fmt.Println("Contents of file:", string(data))
@@ -58,7 +58,7 @@ func main() {
 		wfilename := read()
 		_, err := ioutil.ReadFile(rfilename)
 		if err != nil {
-			fmt.Println("File reading error:\n\t", err)
+			fmt.Println("File reading error:\n\t", err, "\n\nMake sure you're in the correct folder and that you spelled everything correctly.")
 			return
 		}
 		fmt.Print("\n\tDecrypt? (Y/N): ")
@@ -85,7 +85,7 @@ func main() {
 			rfilename := buffer.String()
 			cont, err := ioutil.ReadFile(rfilename)
 			if err != nil {
-				fmt.Println("File reading error:\n\t", err)
+				fmt.Println("File reading error:\n\t", err, "\n\nMake sure you're in the correct folder and that you spelled everything correctly.")
 				return
 			}
 			fmt.Printf("\tContent of file is:\n\n%s\n", cont)
@@ -111,7 +111,7 @@ func main() {
 			rfilename := buffer.String()
 			cont, err := ioutil.ReadFile(rfilename)
 			if err != nil {
-				fmt.Println("File reading error:\n\t", err)
+				fmt.Println("File reading error:\n\t", err, "\n\nMake sure you're in the correct folder and that you spelled everything correctly.")
 				return
 			}
 			fmt.Print("\n\tUnbyteify? (y/n)")
