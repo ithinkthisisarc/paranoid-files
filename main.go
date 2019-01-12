@@ -22,7 +22,8 @@ func main() {
 	fmt.Print("Welcome to Paranoid Files\nPlease select a mode (e, d): ")
 	mode := read()
 	fmt.Print("\n")
-	if mode == "e" {
+	switch mode {
+	case "e":
 		fmt.Print("Selected encrypt mode\n\n")
 		fmt.Print("Enter the name of the file to be encrypted (no extension): ")
 		name := read()
@@ -45,15 +46,12 @@ func main() {
 			cont := string(data)
 			encryption(cont, name+".para")
 		}
-	} else if mode == "d" {
+	case "d":
 		fmt.Println("Selected decrypt mode\n")
 		fmt.Print("Enter the file to decrypt (no extension): ")
 		name := read()
-		fmt.Print("\nEnter the file extension: ")
-		ext := read()
 		buffer.WriteString(name)
-		buffer.WriteString(".")
-		buffer.WriteString(ext)
+		buffer.WriteString(".para")
 		rfilename := buffer.String()
 		buffer.Reset()
 		fmt.Print("Enter the name of the file you want exported: ")
@@ -71,9 +69,9 @@ func main() {
 				log.Fatalf("error: %v", err)
 			}
 		}
-	} else if mode == "exit" {
+	case "exit":
 		return
-	} else {
+	default:
 		fmt.Printf("%s is not a valid mode...\n----------------------\n\n", mode)
 		main()
 	}
