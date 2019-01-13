@@ -8,49 +8,39 @@ import (
 	"strings"
 )
 
-func mode_e() {
-	fmt.Print("Selected encrypt mode\n\n")
-	fmt.Print("Enter the name of the file to be encrypted: ")
-	rfilename := read()
-	data, err := ioutil.ReadFile(rfilename)
+func mode_e(target string, export string) {
+	data, err := ioutil.ReadFile(target)
 	if err != nil {
 		fmt.Println("File reading error:\n\t", err, "\n\nMake sure you're in the correct folder and that you spelled everything correctly.")
 		return
 	}
-	fmt.Print("Enter the name of the file to be exported: ")
-	wfilename := read()
 	fmt.Println("Contents of file:", string(data))
-	fmt.Print("\n\tEncrypt? (Y/N): ")
+	fmt.Print("\n\tEncrypt? (y/N): ")
 	inp := read()
 	if strings.HasPrefix(strings.ToLower(inp), "y") {
 		cont := string(data)
-		encryption(cont, wfilename)
+		encryption(cont, export)
 	}
 }
 
-func mode_d() {
-	fmt.Println("Selected decrypt mode\n")
-	fmt.Print("Enter the file to decrypt: ")
-	rfilename := read()
-	fmt.Print("Enter the name of the file you want exported: ")
-	wfilename := read()
-	_, err := ioutil.ReadFile(rfilename)
+func mode_d(target string, export string) {
+	_, err := ioutil.ReadFile(target)
 	if err != nil {
 		fmt.Println("File reading error:\n\t", err, "\n\nMake sure you're in the correct folder and that you spelled everything correctly.")
 		return
 	}
-	fmt.Print("\n\tDecrypt? (Y/N): ")
+	fmt.Print("\n\tDecrypt? (y/N): ")
 	inp := read()
 	if strings.HasPrefix(strings.ToLower(inp), "y") {
-		err := ioutil.WriteFile(wfilename, []byte(decryption(rfilename)), 0644)
+		err := ioutil.WriteFile(export, []byte(decryption(target)), 0644)
 		if err != nil {
 			log.Fatalf("error: %v", err)
 		}
-		fmt.Printf("\nExported to file: %s", wfilename)
+		fmt.Printf("\nExported to file: %s", export)
 	}
 }
 
-func mode_b() {
+func mode_b() { // TODO
 	var buffer bytes.Buffer
 
 	fmt.Print("Select mode:\n b: byteify\n u: unbyteify\n ")
@@ -72,7 +62,7 @@ func mode_b() {
 			return
 		}
 		fmt.Printf("\tContent of file is:\n\n%s\n", cont)
-		fmt.Print("\n\tByteify? (Y/N)")
+		fmt.Print("\n\tByteify? (y/N)")
 		inp := read()
 		if strings.HasPrefix(strings.ToLower(inp), "y") {
 			wfilename := name + ".bara"
@@ -97,7 +87,7 @@ func mode_b() {
 			fmt.Println("File reading error:\n\t", err, "\n\nMake sure you're in the correct folder and that you spelled everything correctly.")
 			return
 		}
-		fmt.Print("\n\tUnbyteify? (Y/N)")
+		fmt.Print("\n\tUnbyteify? (y/N)")
 		inp := read()
 		if strings.HasPrefix(strings.ToLower(inp), "y") {
 			fmt.Print("\nEnter the name of the file to be exported: ")
