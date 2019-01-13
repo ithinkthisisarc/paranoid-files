@@ -37,7 +37,7 @@ func main() {
 		fmt.Println("Contents of file:", string(data))
 		fmt.Print("\n\tEncrypt? (Y/N): ")
 		inp := read()
-		if strings.ToLower(inp) == "y" {
+		if strings.ToLower(inp) == "y" || strings.ToLower(inp) == "yes" {
 			cont := string(data)
 			encryption(cont, wfilename)
 		}
@@ -54,7 +54,7 @@ func main() {
 		}
 		fmt.Print("\n\tDecrypt? (Y/N): ")
 		inp := read()
-		if strings.ToLower(inp) == "y" {
+		if strings.ToLower(inp) == "y" || strings.ToLower(inp) == "yes" {
 			err := ioutil.WriteFile(wfilename, []byte(decryption(rfilename)), 0644)
 			if err != nil {
 				log.Fatalf("error: %v", err)
@@ -83,7 +83,7 @@ func main() {
 			fmt.Printf("\tContent of file is:\n\n%s\n", cont)
 			fmt.Print("\n\tByteify? (Y/N)")
 			inp := read()
-			if strings.ToLower(inp) == "y" {
+			if strings.ToLower(inp) == "y" || strings.ToLower(inp) == "yes" {
 				wfilename := name + ".bara"
 				bcont := []byte(cont)
 				err = ioutil.WriteFile(wfilename, bcont, 0644)
@@ -108,7 +108,7 @@ func main() {
 			}
 			fmt.Print("\n\tUnbyteify? (Y/N)")
 			inp := read()
-			if strings.ToLower(inp) == "y" {
+			if strings.ToLower(inp) == "y" || strings.ToLower(inp) == "yes" {
 				fmt.Print("\nEnter the name of the file to be exported: ")
 				wfilename := read()
 				err = ioutil.WriteFile(wfilename, []byte(cont), 0644)
