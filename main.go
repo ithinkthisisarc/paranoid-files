@@ -27,8 +27,6 @@ func main() {
 		mode_d(target, export)
 	case "b": // TODO
 		mode_b()
-	case "exit":
-		return
 	default:
 		fmt.Printf("%s is not a valid mode...\n----------------------\n\n", mode)
 		main()
