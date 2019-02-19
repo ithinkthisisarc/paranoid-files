@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"strings"
+	"github.com/fatih/color"
 )
 
 func mode_e() {
@@ -26,6 +27,7 @@ func mode_e() {
 		cont := string(data)
 		encryption(cont, wfilename)
 	}
+	color.Blue("\nExported to file: %s\n", wfilename)
 }
 
 func mode_d() {
@@ -46,7 +48,7 @@ func mode_d() {
 		if err != nil {
 			log.Fatalf("error: %v", err)
 		}
-		fmt.Printf("\nExported to file: %s", wfilename)
+		color.Blue("\nExported to file: %s\n", wfilename)
 	}
 }
 
