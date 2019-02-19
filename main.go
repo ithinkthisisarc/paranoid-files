@@ -18,14 +18,14 @@ func main() {
 	fmt.Print("Welcome to Paranoid Files\nPlease select a mode:\n e: encrypt\n d: decrypt\n ")
 	mode := read()
 	fmt.Print("\n")
-	switch strings.ToLower(mode) {
-	case "e":
+	switch {
+	case strings.HasPrefix(strings.ToLower(mode), "e"):
 		mode_e()
-	case "d":
+		
+	case strings.HasPrefix(strings.ToLower(mode), "d"):
 		mode_d()
-	case "b": // TODO
-		mode_b()
-	case "exit":
+
+	case strings.HasPrefix(mode, "exit"):
 		return
 	default:
 		fmt.Printf("%s is not a valid mode...\n----------------------\n\n", mode)
