@@ -15,7 +15,7 @@ func stringInSlice(a string, list []string) bool {
 }
 
 func main() {
-	fmt.Print("Welcome to Paranoid Files\nPlease select a mode:\n e: encrypt\n d: decrypt\n ")
+	fmt.Print("Welcome to Paranoid Files\nPlease select a mode:\n e: encrypt\n d: decrypt\n m: mix\n u: unmix\n> ")
 	mode := read()
 	fmt.Print("\n")
 	switch {
@@ -24,6 +24,12 @@ func main() {
 		
 	case strings.HasPrefix(strings.ToLower(mode), "d"):
 		mode_d()
+
+	case strings.HasPrefix(strings.ToLower(mode), "m"):
+		mode_m()
+
+	case strings.HasPrefix(strings.ToLower(mode), "u"):
+		mode_u()
 
 	case strings.HasPrefix(mode, "exit"):
 		return

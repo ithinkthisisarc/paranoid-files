@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 )
 
 const (
@@ -89,6 +90,137 @@ func decryption(n string) []byte {
 	stream := cipher.NewCTR(blockCipher, IV)
 	stream.XORKeyStream(bytes, bytes)
 	return bytes
+}
+
+func mix(text string, x string) {
+	a := strings.Split(text, "")
+	for j, i := range a {
+		switch strings.ToLower(i) {
+		case "a":
+			a[j] = "t"
+		case "b":
+			a[j] = "g"
+		case "c":
+			a[j] = "e"
+		case "d":
+			a[j] = "q"
+		case "e":
+			a[j] = "u"
+		case "f":
+			a[j] = "i"
+		case "g":
+			a[j] = "c"
+		case "h":
+			a[j] = "k"
+		case "i":
+			a[j] = "b"
+		case "j":
+			a[j] = "r"
+		case "k":
+			a[j] = "o"
+		case "l":
+			a[j] = "w"
+		case "m":
+			a[j] = "n"
+		case "n":
+			a[j] = "f"
+		case "o":
+			a[j] = "x"
+		case "p":
+			a[j] = "j"
+		case "q":
+			a[j] = "m"
+		case "r":
+			a[j] = "p"
+		case "s":
+			a[j] = "s"
+		case "t":
+			a[j] = "v"
+		case "u":
+			a[j] = "h"
+		case "v":
+			a[j] = "l"
+		case "w":
+			a[j] = "a"
+		case "x":
+			a[j] = "z"
+		case "y":
+			a[j] = "y"
+		case "z":
+			a[j] = "d"
+		}
+		b := strings.Join(a, "")
+		err := ioutil.WriteFile(x, []byte(b), 0644)
+		if err != nil {
+			log.Fatalf("error: %v", err)
+		}
+	}
+}
+
+func unmix(file string) []byte {
+	data, err := ioutil.ReadFile(file)
+	if err != nil {
+		log.Fatalf("Error reading file:\n ===> %v", err)
+	}
+	a := strings.Split(string(data), "")
+	for j, i := range a {
+		switch strings.ToLower(i) {
+		case "t":
+			a[j] = "a"
+		case "g":
+			a[j] = "b"
+		case "e":
+			a[j] = "c"
+		case "q":
+			a[j] = "d"
+		case "u":
+			a[j] = "e"
+		case "i":
+			a[j] = "f"
+		case "c":
+			a[j] = "g"
+		case "k":
+			a[j] = "h"
+		case "b":
+			a[j] = "i"
+		case "r":
+			a[j] = "j"
+		case "o":
+			a[j] = "k"
+		case "w":
+			a[j] = "l"
+		case "n":
+			a[j] = "m"
+		case "f":
+			a[j] = "n"
+		case "x":
+			a[j] = "o"
+		case "j":
+			a[j] = "p"
+		case "m":
+			a[j] = "q"
+		case "p":
+			a[j] = "r"
+		case "s":
+			a[j] = "s"
+		case "v":
+			a[j] = "t"
+		case "h":
+			a[j] = "u"
+		case "l":
+			a[j] = "v"
+		case "a":
+			a[j] = "w"
+		case "z":
+			a[j] = "x"
+		case "y":
+			a[j] = "y"
+		case "d":
+			a[j] = "z"
+		}
+	}
+	b := strings.Join(a, "")
+	return []byte(b)
 }
 
 func read() string {
